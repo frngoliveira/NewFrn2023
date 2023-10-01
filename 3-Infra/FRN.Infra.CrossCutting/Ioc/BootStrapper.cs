@@ -16,6 +16,9 @@ namespace FRN.Infra.CrossCutting.Ioc
             services.AddScoped<IProdutoAppService, ProdutoAppService>();
             services.AddScoped<IDomainNotificationHandler, DomainNotificationHandler>();
 
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUserAppService, UserAppService>();
+
             services.AddScoped<FRNContext>();
 
             return services;
