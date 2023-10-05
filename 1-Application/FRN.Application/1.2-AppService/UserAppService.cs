@@ -15,12 +15,12 @@ namespace FRN.Application._1._2_AppService
         {
             _userRepository = userRepository;
         }
-        public IEnumerable<Users> Get(Users user)
+        public Users Get(Users user)
         {
             try
             {
                 var result = _userRepository.Get(user);                
-                return _mapper.Map<IEnumerable<Users>>(result);
+                return _mapper.Map<Users>(result);
             }
             catch (Exception ex)
             {
@@ -42,6 +42,34 @@ namespace FRN.Application._1._2_AppService
             try
             {
                 var result = _userRepository.GetAllUser();
+                if (result == null)
+                {
+                    NotifyError("Não foram encontrados dados na Pesquisa");
+                    return null;
+                }
+                return _mapper.Map<IEnumerable<Users>>(result);
+            }
+            catch (Exception ex)
+            {
+                if (ex is SqlException)
+                {
+                    NotifyError(ex.Message.ToString());
+                    return null;
+                }
+                else
+                {
+                    NotifyError(ex.Message.ToString());
+                    return null;
+                }
+            }
+        }
+
+        public IEnumerable<Users> GetAllUserById(int id)
+        {
+            try
+            {
+                var result = _userRepository.GetAllUserById(id);
+
                 if (result == null)
                 {
                     NotifyError("Não foram encontrados dados na Pesquisa");

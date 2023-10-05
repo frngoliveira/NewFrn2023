@@ -4,9 +4,10 @@ namespace FRN.Application._1._1_Interface
 {
     public interface IUserAppService
     {
-        IEnumerable<Users> Get(Users user);
+        Users Get(Users user);
         IEnumerable<Users> GetAllUser();
         void Post(Users user);
         void Put(Users user);
+        IEnumerable<Users> GetAllUserById(int id);
     }
 }

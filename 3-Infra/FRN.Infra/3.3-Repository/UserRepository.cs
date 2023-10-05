@@ -22,7 +22,7 @@ namespace FRN.Infra._3._3_Repository
             _notificator = notificator;
         }
 
-        public IEnumerable<Users> Get(Users user)
+        public Users Get(Users user)
         {
             //StringBuilder errorMessage = new StringBuilder();
             string query = $@"SELECT * FROM Users WHERE UserName = '{user.UserName}' AND Password = '{user.Password}'";
@@ -32,7 +32,7 @@ namespace FRN.Infra._3._3_Repository
                 using (SqlConnection cnx = new SqlConnection(
                     _context.Database.GetDbConnection().ConnectionString))
                 {
-                    var dados = cnx.Query<Users>(query);
+                    var dados = cnx.Query<Users>(query).FirstOrDefault();
                     return dados;
                 }
             }
@@ -56,6 +56,30 @@ namespace FRN.Infra._3._3_Repository
                     _context.Database.GetDbConnection().ConnectionString))
                 {
                     var dados = cnx.Query<Users>("select * from Users");
+                    return dados;
+                }
+            }
+            catch (SqlException Sqlex)
+            {
+                for (int i = 0; i < Sqlex.Errors.Count; i++)
+                {
+                    _notificator.Handle(Sqlex.Errors[i].Message);
+                }
+                return null;
+            }
+        }
+
+        public IEnumerable<Users> GetAllUserById(int id)
+        {
+            StringBuilder errorMessage = new StringBuilder();
+            string query = $@"select * from Users WHERE id = {id}";
+
+            try
+            {
+                using (SqlConnection cnx = new SqlConnection(
+                    _context.Database.GetDbConnection().ConnectionString))
+                {
+                    var dados = cnx.Query<Users>(query);
                     return dados;
                 }
             }

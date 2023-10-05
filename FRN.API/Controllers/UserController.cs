@@ -19,21 +19,24 @@ namespace FRN.API.Controllers
         }
 
         [HttpGet("Login")]
-        public IActionResult Login(string userName, string senha)
+        public IActionResult Login(string userName, string password)
         {
             var user = new Users
             {
                 UserName = userName,
-                Password = senha
+                Password = password
             };
 
             var result = _userAppService.Get(user);            
-
+         
             if (result == null) return BadRequest(new { message = "Usuário ou Senha Inválido"});
+
+            user.Role = result.Role;
 
             var token = TokenService.GenerateToken(user);
 
             user.Password = "";
+            
 
             var value = new
             {
@@ -48,6 +51,18 @@ namespace FRN.API.Controllers
         public IActionResult GetAllUser()
         {
             var result = _userAppService.GetAllUser();
+
+            if (IsValidOperation())
+                return Response(result);
+
+            if (result == null) return NotFound();
+            return Response(result);
+        }
+
+        [HttpGet("getById")]
+        public IActionResult GetAllUserById(int id)
+        {
+            var result = _userAppService.GetAllUserById(id);
 
             if (IsValidOperation())
                 return Response(result);
