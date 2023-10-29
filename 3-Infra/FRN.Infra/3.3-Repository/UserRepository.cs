@@ -133,9 +133,7 @@ namespace FRN.Infra._3._3_Repository
         public void Put(Users user)
         {
             StringBuilder errorMessage = new StringBuilder();
-            string query = $@"UPDATE Users SET UserName = '{user.UserName}', 
-                                           SET Password = '{user.Password}',
-                                           SET Role = '{user.Role}' WHERE id={user.Id}";
+            string query = $@"UPDATE Users SET UserName = '{user.UserName}', Password = '{user.Password}', Role = '{user.Role}' WHERE id={user.Id}";
 
             using (SqlConnection cnx = new SqlConnection(
                 _context.Database.GetDbConnection().ConnectionString))

@@ -1,6 +1,5 @@
 ﻿using FRN.API.Services;
 using FRN.Application._1._1_Interface;
-using FRN.Application._1._2_AppService;
 using FRN.Domain._2._1_Interface;
 using FRN.Domain._2._2_Entity;
 using Microsoft.AspNetCore.Mvc;
