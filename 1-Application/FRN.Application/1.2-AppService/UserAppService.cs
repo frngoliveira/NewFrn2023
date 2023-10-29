@@ -129,5 +129,24 @@ namespace FRN.Application._1._2_AppService
                 }
             }
         }
+
+        public  void Delete(Users user)
+        {
+            try
+            {
+                _userRepository.Delete(user);
+            }
+            catch (Exception ex)
+            {
+                if (ex is SqlException)
+                {
+                    NotifyError(ex.Message.ToString());
+                }
+                else
+                {
+                    NotifyError(ex.Message.ToString());
+                }
+            }
+        }
     }
 }

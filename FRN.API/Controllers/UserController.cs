@@ -85,5 +85,13 @@ namespace FRN.API.Controllers
             _userAppService.Put(user);
             return Response(user);
         }
+
+        [HttpDelete("delete")]
+        public IActionResult Delete([FromBody] Users user)
+        {
+            if (!ModelState.IsValid) return Response(ModelState);
+            _userAppService.Delete(user);
+            return Response(user);
+        }
     }
 }

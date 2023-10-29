@@ -167,6 +167,44 @@ namespace FRN.Infra._3._3_Repository
             }
         }
 
+        public void Delete(Users user)
+        {
+            StringBuilder errorMessage = new StringBuilder();
+            string query = $@"Delete FROM Users WHERE id={user.Id}";
+
+            //DELETE FROM Users WHERE Id = @UserId
+
+            using (SqlConnection cnx = new SqlConnection(
+                _context.Database.GetDbConnection().ConnectionString))
+            {
+                cnx.Open();
+                var transacao = cnx.BeginTransaction();
+
+                try
+                {
+                    cnx.Execute(query, transaction: transacao);
+                    transacao.Commit();
+                }
+                catch (SqlException Sqlex)
+                {
+                    transacao.Rollback();
+                    cnx.Close();
+
+                    for (int i = 0; i < Sqlex.Errors.Count; i++)
+                    {
+                        errorMessage.Append("Mensagem: " + Sqlex.Errors[i].Message);
+                    }
+                    throw new Exception(errorMessage.ToString());
+                }
+                catch (Exception ex)
+                {
+                    transacao.Rollback();
+                    cnx.Close();
+                    throw new Exception(ex.Message.ToString());
+                }
+                cnx.Close();
+            }
+        }
 
     }
 }

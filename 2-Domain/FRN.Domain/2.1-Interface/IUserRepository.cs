@@ -9,6 +9,7 @@ namespace FRN.Domain._2._1_Interface
         void Post(Users user);
         void Put(Users user);
         IEnumerable<Users> GetAllUserById(int id);
+        void Delete(Users user);
 
     }
 }

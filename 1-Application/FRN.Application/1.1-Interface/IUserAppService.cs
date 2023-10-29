@@ -9,5 +9,6 @@ namespace FRN.Application._1._1_Interface
         void Post(Users user);
         void Put(Users user);
         IEnumerable<Users> GetAllUserById(int id);
+        void Delete(Users user);
     }
 }
