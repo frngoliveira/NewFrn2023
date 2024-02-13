@@ -11,6 +11,7 @@ namespace FRN.API.Controllers
     {
 
         private readonly IUserAppService _userAppService;
+
         public UserController(IUserAppService userAppService,
                               IDomainNotificationHandler notifications) : base(notifications)
         {
