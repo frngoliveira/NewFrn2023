@@ -8,7 +8,8 @@ namespace FRN.API.Controllers
 {
     [ApiController]
     public class HomeController : ControllerBase
-    {
+    { 
+
         [HttpGet]
         [Route("Anonymous")]
         [AllowAnonymous]
