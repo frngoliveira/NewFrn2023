@@ -9,7 +9,6 @@ namespace FRN.API.Controllers
     [Route("api/[controller]")]
     public class UserController : ApiController
     {
-
         private readonly IUserAppService _userAppService;
 
         public UserController(IUserAppService userAppService,
