@@ -8,6 +8,7 @@ trigger:
 
 pool: 'myagent'
 
+
 variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
