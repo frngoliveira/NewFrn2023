@@ -18,7 +18,6 @@ namespace FRN.API.Controllers
             _userAppService = userAppService;
         }
 
-
         [HttpGet("Login")]
         public IActionResult Login(string userName, string password)
         {
